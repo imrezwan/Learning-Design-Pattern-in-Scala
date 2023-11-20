@@ -12,6 +12,11 @@ class ExperimentRunner {
   def processTableDataExperiment(tableName: String): Unit = {
     println(s"Processing table data experiment for table: $tableName")
   }
+
+  // NEW REQUIREMENT FIX - Processing Video Data--------
+  def processVideoExperiment(videoType: String): Unit = {
+    println(s"Processing video experiment for type: $videoType")
+  }
 }
 
 // Concrete Commands: MLModelExperimentCommand and TableDataExperimentCommand
@@ -35,5 +40,11 @@ class ExperimentManager {
     experimentCommands.foreach(_.execute())
     experimentCommands = List() // Clear the experiment commands after processing
   }
+}
+
+//------------------------------------------ NEW REQUIREMENT --------------------- Need to process video data now
+// New Command: videoProcessingExperimentCommand
+class VideoProcessingExperimentCommand(experimentRunner: ExperimentRunner, videoType: String) extends ExperimentCommand {
+  override def execute(): Unit = experimentRunner.processVideoExperiment(videoType)
 }
 
